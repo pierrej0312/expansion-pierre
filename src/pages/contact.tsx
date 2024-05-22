@@ -24,7 +24,8 @@ const Contact: React.FC = () => {
                 <meta name="description" content="Description de la page Nos Métiers" />
             </Head>
             <Page>
-                <h2>Contact</h2>
+                <div className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 w-100"><h2>Contact</h2></div>
+
             </Page>
         </div>
     );

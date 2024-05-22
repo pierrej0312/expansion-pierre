@@ -11,10 +11,7 @@ const Header: React.FC = () => {
 
     const navItems: NavItem[] = [
         { href: '/', label: 'Bienvenue' },
-        {
-            href: '/nos-metiers',
-            label: 'Nos métiers',
-        },
+        { href: '/nos-metiers', label: 'Nos métiers'},
         { href: '/notre-methodologie', label: 'Notre méthodologie' },
         { href: '/agence', label: `L'agence` },
         { href: '/blog', label: 'Blog' },
@@ -24,14 +21,14 @@ const Header: React.FC = () => {
         <header className={styles.header + " appContainer"}>
             {/* Nav Desktop */}
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 w-100" aria-label="Global">
-                <div className="flex lg:flex-1">
+                <div className="flex">
                     <Link href="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Your Company</span>
                         <Image
                             src="/assets/logo.svg"
                             width={184.7}
                             height={81.76}
-                            alt="logo"
+                            alt="logo Digital Booster, A solution of expansion"
                             className="h-8 w-auto"
                         />
                     </Link>
@@ -80,11 +77,11 @@ const Header: React.FC = () => {
                         </li>
                     ))}
                 </ul>
-                <ul className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-12">
+                <ul className="hidden lg:flex lg:justify-end lg:gap-x-12 items-center">
                     <Link href="/contact" className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === "/contact" ? styles.activeLink : styles.navItem}`}>
                         Contact
                     </Link>
-                    <button aria-label="CTA title ?" className="ml-4"></button>
+                    <button aria-label="CTA title ?" className="ml-4 btn primary-btn">Prendre un rendez-vous</button>
                 </ul>
             </nav>
 
@@ -96,7 +93,7 @@ const Header: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <Link href="/" className="-m-1.5 p-1.5">
                                 <span className="sr-only">Your Company</span>
-                                <Image className="h-8 w-auto" src="/assets/logo.svg" alt=""
+                                <Image className="h-8 w-auto" src="/assets/logo.svg" alt="logo Digital Booster, A solution of expansion"
                                        width={32}
                                        height={32}/>
                             </Link>
@@ -142,7 +139,7 @@ const Header: React.FC = () => {
                                     <Link href="/contact" className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === "/contact" ? styles.activeLink : styles.navItem}`}>
                                         Contact
                                     </Link>
-                                    <button aria-label="CTA title ?" className="ml-4"></button>
+                                    <button aria-label="ouvrir popup prise de rendez-vous" className="ml-4 btn primary-btn">Prendre un rendez-vous</button>
                                 </div>
                             </div>
                         </div>

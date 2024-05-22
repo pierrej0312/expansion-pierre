@@ -36,7 +36,8 @@
 .appContainer {
   width: 100%;
   min-height: 90vh;
-  overflow-x: hidden;
+  height: fit-content;
+  overflow: hidden;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   line-height: 100%;
@@ -56,11 +57,10 @@
   }
   a, .navLink {
   text-decoration: none;
+    height: fit-content;
   }
   p {
     font-family: "AzoSansTest", sans-serif;
-    font-weight: 600;
-    line-height: 125%;
   }
   canvas {
     position: absolute;
@@ -68,7 +68,13 @@
     top: 50%;
     transform: translate(-50%, -30%);
   }
-
+  .btn {
+    @include btn;
+    &.primary-btn {
+      @include btn();
+    }
+  }
 }
 
-@import "flex";
+@import "layout";
+
