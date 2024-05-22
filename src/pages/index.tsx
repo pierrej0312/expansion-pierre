@@ -7,6 +7,8 @@ import Header from '../components/Header';
 import Footer from "@/components/Footer";
 import Page from "@/components/Page";
 import Image from "next/image";
+import {gsap} from "gsap";
+
 const Home: React.FC = () => {
     const canvasRef = useRef<HTMLDivElement>(null);
 
@@ -78,12 +80,12 @@ const Home: React.FC = () => {
             particles.setAttribute('velocity', new THREE.BufferAttribute(velocities, 3));
 
             const particleMaterial = new THREE.PointsMaterial({
-                color: 0xE75336,
+                color: 0xFFFFFF,
                 size: 0.1,
                 map: particleTexture,
                 blending: THREE.AdditiveBlending,
                 transparent: true,
-                opacity: 0.3,
+                opacity: 0.1,
                 depthWrite: false,
             });
 
@@ -126,10 +128,23 @@ const Home: React.FC = () => {
 
             const animateRocket = () => {
                 model.position.y = rocketPosition;
-                rocketPosition += speed * direction; // Adjust the speed here as needed
+                rocketPosition += speed * direction;
+                 // Adjust the speed here as needed
 
-                if (rocketPosition > 3 || rocketPosition < 1) {
-                    direction *= -1; // Change direction when reaching upper or lower bounds
+                if (rocketPosition < 1) {
+                    direction *= -1;
+                    gsap.to(model.rotation, {
+                        y: model.rotation.y + Math.PI * 2,
+                        duration: 2,
+                        ease: 'power1.inOut'
+                    });
+                    speed = 0.015;
+                    rocketPosition += speed * direction;
+                }
+                if (rocketPosition > 3) {
+                    direction *= -1;
+                    speed = 0.005;
+                    rocketPosition += speed * direction;
                 }
             };
 
@@ -154,31 +169,38 @@ const Home: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <Header />
+        <>
             <Page>
-                <main className={styles.header + " container"}>
-                    <section className="flex-col">
-                        <h2>
-                            Nous vous accompagnons dans votre <strong>expansion digitale</strong>
-                        </h2>
-                        <p>Le programme Digital Booster d’Expansion est <strong>l’atout digital des petites, moyennes et grandes entreprises</strong> qui souhaitent développer ou confirmer leur présence en ligne.</p>
-                        <button>
-                            <Image
-                                src="/assets/icon.svg"
-                                width={32}
-                                height={32}
-                                alt="icon"
-                                className="h-8 w-auto"/>
-                            Faites le test sans plus tarder
-                        </button>
+                <main className={styles.header + " mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 w-100"}>
+                    <section className={styles.heroSection + " flex-col -max-w-5xl"}>
+                        <div className="relative isolate px-6 pt-14">
+                            <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+                                <div className="text-center">
+                                    <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Nous vous accompagnons dans votre <strong>expansion digitale</strong></h1>
+                                    <p className="mt-6 text-lg leading-8 text-gray-600">Le programme Digital Booster d’Expansion est <strong>l’atout digital des petites, moyennes et grandes entreprises</strong> qui souhaitent développer ou confirmer leur présence en ligne.</p>
+                                    <div className="mt-10 flex items-center justify-center gap-x-6">
+                                        <button aria-label="ouvrir le formulaire de demande de test">
+                                            <Image
+                                                src="/assets/icon.svg"
+                                                width={32}
+                                                height={32}
+                                                alt="icon"
+                                                className="h-8 w-auto"/>
+                                            Faites le test sans plus tarder
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
-                    <div ref={canvasRef} className={styles.canvasContainer}>
+                    <div aria-hidden="true" className={styles.heroScene}>
+                        <div ref={canvasRef} className={styles.canvasContainer}></div>
+                        <span className={`${styles.device} ${styles.open}`}></span>
+                        <span className={`${styles.device} ${styles.wireframe}`}></span>
                     </div>
                 </main>
             </Page>
-            <Footer />
-        </div>
+        </>
     );
 };
 

@@ -1,0 +1,7 @@
+@mixin animation($animationType: scaleX, $duration: 300ms, $function: ease-in-out, $iteration: 1) {
+  animation-name: $animationType;
+  animation-fill-mode: forwards;
+  animation-duration: $duration;
+  animation-iteration-count: $iteration;
+  animation-timing-function: $function;
+}

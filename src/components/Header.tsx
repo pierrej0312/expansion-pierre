@@ -21,16 +21,16 @@ const Header: React.FC = () => {
     ];
 
     return (
-        <header className={styles.header}>
+        <header className={styles.header + " appContainer"}>
             {/* Nav Desktop */}
-            <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+            <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 w-100" aria-label="Global">
                 <div className="flex lg:flex-1">
                     <Link href="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Your Company</span>
                         <Image
                             src="/assets/logo.svg"
-                            width={32}
-                            height={32}
+                            width={184.7}
+                            height={81.76}
                             alt="logo"
                             className="h-8 w-auto"
                         />
@@ -49,7 +49,7 @@ const Header: React.FC = () => {
                         <li key={index}>
                             {navItem.subNavItem ? (
                                 <div className="relative">
-                                    <button type="button" className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                                    <button type="button" className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-700">
                                         {navItem.label}
                                         <svg className="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
                                                         {subNavItem.svg}
                                                     </div>
                                                     <div className="flex-auto">
-                                                        <Link href={subNavItem.href} className={`block font-semibold text-gray-900 ${router.pathname === subNavItem.href ? styles.activeLink : ''}`}>
+                                                        <Link href={subNavItem.href} className={`block font-semibold text-gray-900 ${router.pathname === subNavItem.href ? styles.active : styles.navItem}`}>
                                                             {subNavItem.label}
                                                         </Link>
                                                     </div>
@@ -73,15 +73,15 @@ const Header: React.FC = () => {
                                     </div>
                                 </div>
                             ) : (
-                                <Link href={navItem.href} className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === navItem.href ? styles.activeLink : ''}`}>
+                                <Link href={navItem.href} className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === navItem.href ? styles.active : styles.navItem}`}>
                                     {navItem.label}
                                 </Link>
                             )}
                         </li>
                     ))}
                 </ul>
-                <ul className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <Link href="/contact" className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === "/contact" ? styles.activeLink : ''}`}>
+                <ul className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-12">
+                    <Link href="/contact" className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === "/contact" ? styles.activeLink : styles.navItem}`}>
                         Contact
                     </Link>
                     <button aria-label="CTA title ?" className="ml-4"></button>
@@ -139,7 +139,7 @@ const Header: React.FC = () => {
                                     ))}
                                 </ul>
                                 <div className="py-6">
-                                    <Link href="/contact" className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === "/contact" ? styles.activeLink : ''}`}>
+                                    <Link href="/contact" className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === "/contact" ? styles.activeLink : styles.navItem}`}>
                                         Contact
                                     </Link>
                                     <button aria-label="CTA title ?" className="ml-4"></button>

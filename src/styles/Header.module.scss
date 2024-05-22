@@ -1,14 +1,50 @@
+@import "global";
 
-.activeLink {
-  color: #E75336;
+.active {
+  position: relative;
+  @extend .scaleXafter;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: $border-radius;
+    background: $cta-color;
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    transform-origin: left;
+  }
+}
+.navItem {
+  position: relative;
+  @extend .scaleXafter;
+  text-decoration: none;
+  transition: all 300ms ease-in-out;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: $border-radius;
+    background: $gray-200;
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    transform-origin: left;
+  }
 }
 .header {
   position: sticky;
   top: 0;
   left: 0;
   width: 100%;
+  min-height: 0;
   display: flex;
   justify-content: space-between;
   padding: 1em;
   z-index: 99999;
 }
+

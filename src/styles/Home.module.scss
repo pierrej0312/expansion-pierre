@@ -1,21 +1,128 @@
+@import "global";
+
 .header {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   overflow: hidden;
 
   > *:not(.canvasContainer) {
     z-index: 999;
   }
-
-  .canvasContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .heroSection {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    @media (min-width: 1024px) {
+      width: 40vw;
+    }
+  }
+  .heroScene {
     z-index: -1;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 20vh;
+    right: 0;
+    @media (min-width: 1024px) {;
+      top: 0;
+      width: 80%;
+      height: 100vh;
+    }
+
+    .canvasContainer {
+      position: absolute;
+      bottom: -10%;
+      left: 50%;
+      width: 100%;
+      height: 80%;
+      overflow: hidden;
+      z-index: 3;
+      transform: translateX(-50%);
+      @media (min-width: 1024px) {
+        left: 20%;
+        bottom: -5%;
+        height: 100%;
+        transform: scale(.6);
+      }
+    }
+    .device {
+      width: 100%;
+      min-width: 400px;
+      height: 100vw;
+      min-height: 400px;
+      display: block;
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      @media (min-width: 1024px) {
+        width: 40vw;
+        height: 40vw;
+        min-width: 700px;
+        min-height: 700px;
+        left: 70%;
+        top: 50%;
+
+      }
+
+      &.open {
+        z-index: 2;
+        background: radial-gradient(circle, rgba(000,000,000,0.1) 20%, rgba(000,000,000,0) 50%) , url('/assets/mobile-open.svg'), radial-gradient(circle, rgba(219,217,217,1) 0%, rgba(219,217,217,0) 70%);
+        background-size: cover, contain, cover;
+        background-repeat: no-repeat, no-repeat, no-repeat;
+        background-position: center;
+        clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+        filter: blur(1px);
+        @media (min-width: 1024px) {
+          background: radial-gradient(circle, rgba(000,000,000,0.1) 20%, rgba(000,000,000,0) 50%) , url('/assets/laptop-open.svg'), radial-gradient(circle, rgba(219,217,217,1) 0%, rgba(219,217,217,0) 70%);
+          background-size: cover, 80%, cover;
+          background-repeat: no-repeat, no-repeat, no-repeat;
+          background-position: center;
+          clip-path: polygon(13% 0, 0 13%, 38% 51%, 0 89%, 14% 100%, 51% 62%, 87% 100%, 100% 87%, 63% 51%, 100% 12%, 86% 0, 50% 39%);
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -10%;
+          left: 0%;
+          width: 50%;
+          height: 50%;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 31% 69% 70% 30% / 30% 59% 41% 70%;
+          box-shadow: inset 0px 0px 33px 0px rgba(255,255,255,0.4);
+          filter: blur(4px);
+          @extend .rotateInfinite;
+        }
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: -10%;
+          animation-delay: 1000ms;
+          animation-duration: 15000ms;
+          right: 0%;
+          width: 50%;
+          height: 50%;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 31% 69% 70% 30% / 30% 59% 41% 70%;
+          box-shadow: inset 0px 0px 33px 0px rgba(255,255,255,0.4);
+          filter: blur(4px);
+          @extend .rotateInfinite;
+        }
+      }
+
+      &.wireframe {
+        z-index: 1;
+        background: url('/assets/mobile-wireframe.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        @media (min-width: 1024px) {
+          background: url('/assets/laptop-wireframe.svg');
+          background-size: 80%;
+          background-repeat: no-repeat, no-repeat, no-repeat;
+          background-position: center;
+        }
+      }
+    }
   }
 
   /* Other styles */

@@ -23,12 +23,9 @@ const Blog: React.FC = () => {
                 <title>Blog</title>
                 <meta name="description" content="Description de la page l'agence" />
             </Head>
-
-            <Header></Header>
             <Page>
                 <h2>Blog</h2>
             </Page>
-            <Footer></Footer>
         </div>
     );
 };

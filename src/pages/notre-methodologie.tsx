@@ -23,12 +23,9 @@ const NotreMethodologie: React.FC = () => {
                 <title>Nos Métiers - Votre entreprise</title>
                 <meta name="description" content="Description de la page Nos Métiers" />
             </Head>
-
-            <Header></Header>
             <Page>
                 <h2>Notre méthodologie</h2>
             </Page>
-            <Footer></Footer>
         </div>
     );
 };
