@@ -46,5 +46,10 @@
   justify-content: space-between;
   padding: 1em;
   z-index: 99999;
+  background: none;
+
+  &.scrolled {
+    background: $gray-000;
+  }
 }
 

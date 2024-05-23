@@ -1,24 +1,35 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from '../styles/Header.module.scss';
-import { NavItem } from "@/@types/navItem";
+import { NavItem } from "@/types/navItem";
 import Image from 'next/image';
+import {navItems} from "@/utils/shared-data";
 
 const Header: React.FC = () => {
     const router = useRouter();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [windowScrolled, setWindowScrolled] = useState(false);
 
-    const navItems: NavItem[] = [
-        { href: '/', label: 'Bienvenue' },
-        { href: '/nos-metiers', label: 'Nos métiers'},
-        { href: '/notre-methodologie', label: 'Notre méthodologie' },
-        { href: '/agence', label: `L'agence` },
-        { href: '/blog', label: 'Blog' },
-    ];
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setWindowScrolled(true);
+            } else {
+                setWindowScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
-        <header className={styles.header + " appContainer"}>
+        <header className={`${windowScrolled == true ? styles.scrolled + ' ' + styles.header + " appContainer" : styles.header + " appContainer"}`}>
             {/* Nav Desktop */}
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 w-100" aria-label="Global">
                 <div className="flex">

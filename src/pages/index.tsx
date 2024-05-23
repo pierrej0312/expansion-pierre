@@ -3,20 +3,22 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import styles from '@/styles/Home.module.scss';
-import Header from '../components/Header';
-import Footer from "@/components/Footer";
 import Page from "@/components/Page";
 import Image from "next/image";
-import {gsap} from "gsap";
-import {Feature} from "@/@types/feature";
+import {Feature} from "@/types/feature";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger);
 const Home: React.FC = () => {
+
+    //bug when moving features into shared-data export, something goes wrong with svg type
     const features: Feature[] = [
         {
             title: 'SSL certificates',
             text: `Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.`,
             svg: (
-                <svg className="h-6 w-6 text-gray-000" fill="none" viewBox="0 0 24 24"
+                <svg className="h-6 w-6 text-highlight" fill="none" viewBox="0 0 24 24"
                      stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"/>
@@ -26,7 +28,7 @@ const Home: React.FC = () => {
             title: 'SSL certificates',
             text: `Sit quis amet rutrum ellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.`,
             svg: (
-                <svg className="h-6 w-6 text-gray-000" fill="none" viewBox="0 0 24 24"
+                <svg className="h-6 w-6 text-highlight" fill="none" viewBox="0 0 24 24"
                      stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
@@ -36,7 +38,7 @@ const Home: React.FC = () => {
             title: 'Simple queues',
             text: `Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.`,
             svg: (
-                <svg className="h-6 w-6 text-gray-000" fill="none" viewBox="0 0 24 24"
+                <svg className="h-6 w-6 text-highlight" fill="none" viewBox="0 0 24 24"
                      stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
@@ -46,7 +48,7 @@ const Home: React.FC = () => {
             title: 'Advanced security',
             text: `Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.`,
             svg: (
-                <svg className="h-6 w-6 text-gray-000" fill="none" viewBox="0 0 24 24"
+                <svg className="h-6 w-6 text-highlight" fill="none" viewBox="0 0 24 24"
                      stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33"/>
@@ -57,6 +59,9 @@ const Home: React.FC = () => {
     const canvasRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+
+        //THREEJS INIT ANIMATION
+
         if (!canvasRef.current) return;
 
         const scene = new THREE.Scene();
@@ -166,7 +171,7 @@ const Home: React.FC = () => {
             };
 
             // Animation code for rocket movement
-            let rocketPosition = 2; // Initial position of the rocket
+            let rocketPosition = -2; // Initial position of the rocket
             let direction = 1;
             let speed = 0.005;
 
@@ -174,7 +179,7 @@ const Home: React.FC = () => {
                 model.position.y = rocketPosition;
                 rocketPosition += speed * direction;
 
-                if (rocketPosition < 1) {
+                if (rocketPosition < -3) {
                     direction *= -1;
                     gsap.to(model.rotation, {
                         y: model.rotation.y + Math.PI * 2,
@@ -184,17 +189,120 @@ const Home: React.FC = () => {
                     speed = 0.015;
                     rocketPosition += speed * direction;
                 }
-                if (rocketPosition > 3) {
+                if (rocketPosition > -1) {
                     direction *= -1;
                     speed = 0.005;
                     rocketPosition += speed * direction;
                 }
             };
 
+            const gsapRocket = () => {
+                const header = document.querySelector(`.${styles.header}`);
+                gsap.to(model, {
+                    onUpdate: () => {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const triggerTop = header!.getBoundingClientRect().top + scrollTop;
+                        const triggerHeight = header!.clientHeight;
+                        const scrollDistance = Math.max(0, scrollTop - triggerTop);
+                        const progress = Math.min(1, scrollDistance / triggerHeight);
+
+                        const initialRotationZ = 0;
+                        const finalRotationZ = Math.PI*1.5;
+                        const newRotationZ = initialRotationZ + (finalRotationZ - initialRotationZ) * progress;
+
+                        const initialRotationY = Math.PI;
+                        const finalRotationY = Math.PI*1.5;
+                        const newRotationY = initialRotationY + (finalRotationY - initialRotationY) * progress;
+
+                        model.rotation.set(0, newRotationY, newRotationZ);
+                    },
+                    ease: "linear",
+                    scrollTrigger: {
+                        trigger: header,
+                        start: 'top top',
+                        end: () => "+=50",
+                        scrub: true,
+                    },
+                });
+                gsap.to(model, {
+                    onUpdate: () => {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const triggerTop = header!.getBoundingClientRect().top + scrollTop;
+                        const triggerHeight = header!.clientHeight;
+                        const scrollDistance = Math.max(0, scrollTop - triggerTop);
+                        const progress = Math.min(1, scrollDistance / triggerHeight);
+
+
+                        const initialPositionY = -2;
+                        const finalPositionY = 5;
+                        const newPositionY = initialPositionY + (finalPositionY - initialPositionY) * progress;
+
+                        model.position.y = newPositionY;
+                    },
+                    ease: "power1.inOut",
+                    scrollTrigger: {
+                        trigger: header,
+                        start: 'top top',
+                        end: () => "+=50",
+                        scrub: true,
+                    },
+                });
+                gsap.to(model, {
+                    onUpdate: () => {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const triggerTop = header!.getBoundingClientRect().top + scrollTop;
+                        const triggerHeight = header!.clientHeight;
+                        const scrollDistance = Math.max(0, scrollTop - triggerTop);
+                        const progress = Math.min(1, scrollDistance / triggerHeight);
+
+
+                        const initialPositionX = 0;
+                        const finalPositionX = 5;
+                        const newPositionx = initialPositionX + (finalPositionX - initialPositionX) * progress;
+
+                        model.position.x = newPositionx;
+                    },
+                    ease: "power1.inOut",
+                    scrollTrigger: {
+                        trigger: header,
+                        start: 'top top',
+                        end: () => "+=150",
+                        scrub: true,
+                    },
+                });
+                gsap.to(model, {
+                    onUpdate: () => {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const triggerTop = header!.getBoundingClientRect().top + scrollTop;
+                        const triggerHeight = header!.clientHeight;
+                        const scrollDistance = Math.max(0, scrollTop - triggerTop);
+                        const progress = Math.min(1, scrollDistance / triggerHeight);
+
+
+                        const initialPositionZ = 0;
+                        const finalPositionZ = 15;
+                        const newPositionZ = initialPositionZ + (finalPositionZ - initialPositionZ) * progress;
+
+                        model.position.z = newPositionZ;
+                    },
+                    ease: "power1.inOut",
+                    scrollTrigger: {
+                        trigger: header,
+                        start: 'top top',
+                        end: () => "+=50",
+                        scrub: true,
+                    },
+                });
+            };
+
             const animate = () => {
                 requestAnimationFrame(animate);
                 animateParticles();
-                animateRocket();
+                if (window.scrollY > 0) {
+                    gsapRocket();
+                } else {
+                    animateRocket();
+                }
                 renderer.render(scene, camera);
             };
 
@@ -209,6 +317,63 @@ const Home: React.FC = () => {
                 canvasRef.current.removeChild(renderer.domElement);
             }
         };
+
+    }, []);
+
+    useEffect(()=> {
+        //GSAP SCROLLTRIGGER
+
+        const clouds = document.querySelector(`.${styles.clouds}`);
+        const header = document.querySelector(`.${styles.header}`);
+        const devices = document.querySelectorAll(`.${styles.device}`);
+        const deviceOpen = document.querySelector(`.${styles.open}`);
+
+        if (clouds && header) {
+            gsap.to(clouds, {
+                y: 1000,
+                ease: "power1.inOut",
+                scrollTrigger: {
+                    trigger: header,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true,
+                },
+            });
+        }
+        if (devices && devices.length > 0) {
+            devices.forEach((device) => {
+                gsap.fromTo(
+                    device,
+                    { scale: 1 },
+                    {
+                        scale: 10,
+                        duration: 5,
+                        ease: "power1.out",
+                        scrollTrigger: {
+                            trigger: header,
+                            start: 'top top',
+                            end: () => "+=1250",
+                            scrub: true,
+                        },
+                    }
+                );
+            });
+        }
+        if(deviceOpen && header) {
+            gsap.fromTo(deviceOpen,
+                {clipPath: "polygon(13% 0, 0 13%, 38% 51%, 0 89%, 14% 100%, 51% 62%, 87% 100%, 100% 87%, 63% 51%, 100% 12%, 86% 0, 50% 39%)"},
+                {
+                    duration: 5,
+                    ease: "power1.out",
+                    clipPath: "polygon(0 0, 0 0, 0 48%, 0 100%, 0 100%, 50% 100%, 100% 100%, 100% 100%, 100% 49%, 100% 0, 100% 0, 50% 0)",
+                    scrollTrigger: {
+                        trigger: header,
+                        start: 'top top',
+                        end: () => "+=250",
+                        scrub: true,
+                    },
+                })
+        }
     }, []);
 
     return (
@@ -238,17 +403,17 @@ const Home: React.FC = () => {
                     </section>
                     <div aria-hidden="true" className={styles.heroScene}>
                         <div ref={canvasRef} className={styles.canvasContainer}></div>
-                        <span className={`${styles.device} ${styles.open}`}></span>
+                        <span className={`${styles.device} ${styles.open}`}><span className={styles.clouds}></span></span>
                         <span className={`${styles.device} ${styles.wireframe}`}></span>
                     </div>
                 </main>
-                <section className="py-24 sm:py-32 -mt-50">
+                <section className="py-24 sm:py-32 mt-20">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl lg:text-center">
                             <h2 className="text-md font-semibold leading-7 text-highlight">Deploy faster</h2>
-                            <p className="mt-2 text-xl tracking-tight text-gray-900 sm:text-4xl">Everything
+                            <p className="mt-2 text-xl tracking-tight text-gray-000 sm:text-4xl">Everything
                                 you need to deploy your app</p>
-                            <p className="mt-6 text-md text-gray-500">Quis tellus eget adipiscing
+                            <p className="mt-6 text-md text-gray-000">Quis tellus eget adipiscing
                                 convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar
                                 et feugiat blandit at. In mi viverra elit nunc.</p>
                         </div>
@@ -256,14 +421,14 @@ const Home: React.FC = () => {
                             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
                                 {features.map((feature, index) => (
                                     <div className="relative pl-16">
-                                        <dt className="text-base font-semibold leading-7 text-gray-900">
+                                        <dt className="text-base font-semibold leading-7 text-gray-000">
                                             <div
-                                                className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-highlight">
+                                                className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-gray-000">
                                                 {feature.svg}
                                             </div>
                                             {feature.title}
                                         </dt>
-                                        <dd className="mt-2 text-base leading-7 text-gray-500">
+                                        <dd className="mt-2 text-base leading-7 text-gray-000">
                                             {feature.text}
                                         </dd>
                                     </div>
