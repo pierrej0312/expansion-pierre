@@ -1,0 +1,33 @@
+.scaleXafter {
+  &::after {
+    transform: scaleX(0);
+  }
+  &.active {
+    &::after {
+      @include animation($animationType: scaleX, $duration: 500ms);
+    }
+  }
+  &:hover {
+    &::after {
+      @include animation($animationType: scaleX, $duration: 500ms);
+    }
+  }
+}
+.rotateInfinite {
+  transform-origin: center;
+  transform: rotate(0deg);
+  @include animation($animationType: rotate, $duration: 10300ms, $function: linear, $iteration: infinite);
+}
+
+@keyframes scaleX {
+  from {transform: scaleX(0)}
+  to {transform: scaleX(1)}
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
