@@ -15,6 +15,33 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <>
             <style jsx global>{`
+              @font-face {
+                font-family: AzoSansWebReg, sans-serif;
+                src: url('../../public/assets/fonts/AzoSansTest-Regular.otf') format('opentype');
+                font-weight: 400;
+              }
+              @font-face {
+                font-family: AzoSansTest, sans-serif ;
+                src: url('../../public/assets/fonts/AzoSansTest-light.otf') format('opentype');
+                font-weight: 200;
+              }
+
+              @font-face {
+                font-family: AzoSansTest, sans-serif ;
+                src: url('../../public/assets/fonts/AzoSansTest-medium.otf') format('opentype');
+                font-weight: 600;
+              }
+
+              @font-face {
+                font-family: AzoSansTest, sans-serif ;
+                src: url('../../public/assets/fonts/AzoSansTest-bold.otf') format('opentype');
+                font-weight: 800;
+              }
+              @font-face {
+                font-family: AzoSansTest, sans-serif ;
+                src: url('../../public/assets/fonts/AzoSansTest-black.otf') format('opentype');
+                font-weight: 900;
+              }
                 .slide-in {
                 position: absolute;
                 top: 0;
