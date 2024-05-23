@@ -105,8 +105,8 @@ const Header: React.FC = () => {
                             <Link href="/" className="-m-1.5 p-1.5">
                                 <span className="sr-only">Your Company</span>
                                 <Image className="h-8 w-auto" src="/assets/logo.svg" alt="logo Digital Booster, A solution of expansion"
-                                       width={32}
-                                       height={32}/>
+                                       width={180}
+                                       height={80}/>
                             </Link>
                             <button type="button" onClick={() => setMobileMenuOpen(false)} className="-m-2.5 rounded-md p-2.5 text-gray-700">
                                 <span className="sr-only">Fermer le menu</span>
@@ -146,7 +146,7 @@ const Header: React.FC = () => {
                                         </li>
                                     ))}
                                 </ul>
-                                <div className="py-6">
+                                <div className="py-6 flex-col gap">
                                     <Link href="/contact" className={`text-sm font-semibold leading-6 text-gray-900 ${router.pathname === "/contact" ? styles.activeLink : styles.navItem}`}>
                                         Contact
                                     </Link>

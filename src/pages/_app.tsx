@@ -15,7 +15,34 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <>
             <style jsx global>{`
-                .slide-in {
+              @font-face {
+                font-family: AzoSansWebReg, sans-serif;
+                src: url('../../public/assets/fonts/AzoSansTest-Regular.otf') format('opentype');
+                font-weight: 400;
+              }
+              @font-face {
+                font-family: AzoSansTest, sans-serif ;
+                src: url('../../public/assets/fonts/AzoSansTest-light.otf') format('opentype');
+                font-weight: 200;
+              }
+
+              @font-face {
+                font-family: AzoSansTest, sans-serif ;
+                src: url('../../public/assets/fonts/AzoSansTest-medium.otf') format('opentype');
+                font-weight: 600;
+              }
+
+              @font-face {
+                font-family: AzoSansTest, sans-serif ;
+                src: url('../../public/assets/fonts/AzoSansTest-bold.otf') format('opentype');
+                font-weight: 800;
+              }
+              @font-face {
+                font-family: AzoSansTest, sans-serif ;
+                src: url('../../public/assets/fonts/AzoSansTest-black.otf') format('opentype');
+                font-weight: 900;
+              }
+              .slide-in {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -23,38 +50,38 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
                 height: 100%;
                 background: #E75336;
                 transform-origin: bottom;
-                  z-index: 99999;
-                }
-                .slide-out {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: #E75336;
-                    transform-origin: top;
-                  z-index: 99999;
-                }
-                /* custom scrollbar */
-                ::-webkit-scrollbar {
-                  width: 20px;
-                }
+                z-index: 99999;
+              }
+              .slide-out {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #E75336;
+                transform-origin: top;
+                z-index: 99999;
+              }
+              /* custom scrollbar */
+              ::-webkit-scrollbar {
+                width: 20px;
+              }
 
-                ::-webkit-scrollbar-track {
-                  background-color: transparent;
-                }
+              ::-webkit-scrollbar-track {
+                background-color: transparent;
+              }
 
-                ::-webkit-scrollbar-thumb {
-                  background-color: #E75336;
-                  border-radius: 20px;
-                  border: 6px solid transparent;
-                  background-clip: content-box;
-                  transition: all 300ms ease-in-out;
-                }
+              ::-webkit-scrollbar-thumb {
+                background-color: #E75336;
+                border-radius: 20px;
+                border: 6px solid transparent;
+                background-clip: content-box;
+                transition: all 300ms ease-in-out;
+              }
 
-                ::-webkit-scrollbar-thumb:hover {
-                  background-color: #4A414D;
-                }
+              ::-webkit-scrollbar-thumb:hover {
+                background-color: #4A414D;
+              }
             `}</style>
             <Header></Header>
             <AnimatePresence mode="wait">
