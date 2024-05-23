@@ -59,10 +59,11 @@ const Home: React.FC = () => {
     const canvasRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        let currentCanvasRef = canvasRef.current;
 
         //THREEJS INIT ANIMATION
 
-        if (!canvasRef.current) return;
+        if (!currentCanvasRef) return;
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -71,7 +72,7 @@ const Home: React.FC = () => {
         renderer.setClearColor(0x000000, 0);
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        canvasRef.current.appendChild(renderer.domElement);
+        currentCanvasRef.appendChild(renderer.domElement);
 
         // SUN
         const sunLight = new THREE.DirectionalLight(0xffffff, 6.42);
@@ -313,8 +314,8 @@ const Home: React.FC = () => {
 
         return () => {
             renderer.dispose();
-            if (canvasRef.current) {
-                canvasRef.current.removeChild(renderer.domElement);
+            if (currentCanvasRef) {
+                currentCanvasRef.removeChild(renderer.domElement);
             }
         };
 
@@ -402,7 +403,7 @@ const Home: React.FC = () => {
                         </div>
                     </section>
                     <div aria-hidden="true" className={styles.heroScene}>
-                        <div ref={canvasRef} className={styles.canvasContainer}></div>
+                        <div ref={canvasRef} key={9245} className={styles.canvasContainer}></div>
                         <span className={`${styles.device} ${styles.open}`}><span className={styles.clouds}></span></span>
                         <span className={`${styles.device} ${styles.wireframe}`}></span>
                     </div>
@@ -420,7 +421,7 @@ const Home: React.FC = () => {
                         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
                             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
                                 {features.map((feature, index) => (
-                                    <div className="relative pl-16">
+                                    <div className="relative pl-16" key={index}>
                                         <dt className="text-base font-semibold leading-7 text-gray-000">
                                             <div
                                                 className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-gray-000">
